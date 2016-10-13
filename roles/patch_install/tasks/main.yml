@@ -1,0 +1,23 @@
+---
+- name: "Download the patch on to the server"
+  wget: 
+  
+  
+- name: "Ensure the ORACLE_HOME, BEA_HOME, MW_HOME WL_SERVER and patch directory exists if not set those variables or exit out"
+  set_fact: 
+  
+  
+- name: "Run the command for execution of patch"  
+  shell: "cd $MW_HOME/utils/bsu ; ./bsu.sh -prod_dir=$WL_SERVER -patchlist={{ item.patch_id }} -verbose -install"
+  with_items: {{ patch_id }}
+  
+- name: "Pause for 15 seconds"
+
+
+- name: "verify the patch has sucesfully installed"
+  shell: "cd $MW_HOME/utils/bsu ; ./bsu.sh -prod_dir=$WL_SERVER -view -status=applied"
+  when: verify_only
+
+
+  
+  

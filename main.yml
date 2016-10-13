@@ -1,0 +1,8 @@
+---
+- hosts: {{ hosts_list }}
+  become: yes
+  become_user: mradmin
+  become_method: su
+  gather_facts: no
+  roles:
+   - role: patch_install
